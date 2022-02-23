@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+     - PORT:${PORT}
+     - POSTGRES_DB:${POSTGRES_DB}
+     - POSTGRES_USER:${POSTGRES_USER}
+     - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
+     - POSTGRES_HOST:${POSTGRES_HOST}
+    ports:
+      - "8081:8080"
+    command: npm run start:dev
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: "postgres:14"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - nps_data:/var/lib/postgresql/data
+volumes:
+  nps_data: {}
