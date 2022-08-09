@@ -6,7 +6,7 @@ commerce-storefront
 
 Clone the repo and install the dependencies.
 
-`git clone https://gitlab.mobidev.biz/tonkovskyi/rest_api_nestjs.git`
+`git clone`
 
 `cd rest_api_nestjs`
 
